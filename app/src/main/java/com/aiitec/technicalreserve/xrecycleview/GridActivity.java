@@ -7,6 +7,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.ContextMenu;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 
 import com.aiitec.openapi.utils.AiiUtil;
@@ -42,8 +45,9 @@ public class GridActivity extends BaseActivity implements  XRecyclerGridAdapter.
         btn_recycler_switch_style.setText("列表");
         GridLayoutManager mLayoutManager = new GridLayoutManager(this, 3);
         mLayoutManager.offsetChildrenHorizontal(AiiUtil.dip2px(this, 8));
-        mLayoutManager.offsetChildrenVertical(AiiUtil.dip2px(this, 8));
-
+        mLayoutManager.offsetChildrenVertical(AiiUtil.dip2px(this,16));
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.recycle_grid_in);
+        recycler_view.setLayoutAnimation(new LayoutAnimationController(anim, 0.5f));
         recycler_view.setLayoutManager(mLayoutManager);
 
         recycler_view.setLoadingMoreEnabled(false);

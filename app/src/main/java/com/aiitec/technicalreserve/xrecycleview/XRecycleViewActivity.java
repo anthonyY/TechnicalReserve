@@ -10,6 +10,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,7 +63,8 @@ public class XRecycleViewActivity extends BaseActivity implements XRecyclerView.
 		recycler_view.setRefreshProgressStyle(ProgressStyle.BallClipRotateMultiple);
 //		recycler_view.setLaodingMoreProgressStyle(ProgressStyle.BallClipRotate);
 //		recycler_view.setArrowImageView(R.drawable.iconfont_downgrey);
-
+		Animation anim = AnimationUtils.loadAnimation(this, R.anim.recycle_list_in);
+		recycler_view.setLayoutAnimation(new LayoutAnimationController(anim, 1));
 		recycler_view.setLoadingListener(this);
 		data2.addAll(data);
 		adapter = new XRecyclerAdapter(this,data2);
