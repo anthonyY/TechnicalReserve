@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="#FF333337"
+    android:id="@+id/ll_title"
+    android:orientation="horizontal" >
+    <ImageButton 
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+    	android:layout_height="match_parent"
+    	android:background="@drawable/btn_public_bg_selector"
+    	android:paddingLeft="16dp"
+    	android:paddingRight="16dp"
+    	android:src="@drawable/icon_arrow_left"/>
+<!--     	android:onClick="onBackClick" -->
+    <TextView 
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+    	android:layout_height="match_parent"
+    	android:textColor="@android:color/white"
+    	android:textSize="20sp"
+    	android:singleLine="true"
+    	android:gravity="center"
+    	/>
+    <ImageButton 
+        android:id="@+id/btn_right"
+        android:layout_width="wrap_content"
+    	android:layout_height="match_parent"
+    	android:paddingLeft="16dp"
+    	android:paddingRight="16dp"
+    	android:visibility="invisible"
+    	android:background="@drawable/btn_public_bg_selector"
+    	/>
+<!--     	android:onClick="onRightClick" -->
+
+</LinearLayout>

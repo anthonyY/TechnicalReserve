@@ -1,0 +1,38 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.3'
+
+    defaultConfig {
+        applicationId "com.aiitec.technicalreserve"
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile 'com.android.support:design:23.2.1'
+    compile 'com.android.support:recyclerview-v7:23.2.1'
+    compile 'com.android.support:cardview-v7:23.1.1'
+    compile 'com.rockerhieu.emojicon:library:1.3.3'
+    compile project(':wheelview')
+    compile project(':zxing')
+    compile project(':multi-image-selector')
+    compile 'com.jcodecraeer:xrecyclerview:1.2.7'
+    //这个貌似需要编译sdk版本23才行， 所以22的可以暂时用下面的库
+    //    compile project(':xrecycleview')
+    compile files('libs/AIIFoundation.jar')
+    compile files('libs/achartengine-1.1.0.jar')
+}

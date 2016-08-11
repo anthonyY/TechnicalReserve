@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.aiitec.technicalreserve">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".image.MultiImageActivity"
+            android:label="@string/title_activity_muti_image_select"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity" />
+        <activity
+            android:name=".image.ImageShowActivity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".image.ImagePagerActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".emoji.EmojiActivity"
+            android:label="@string/title_activity_emoji"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar" -->
+        </activity>
+        <activity
+            android:name=".ad.AdActivity"
+            android:label="@string/title_activity_ad"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".keybroad.KeybroadActivity"
+            android:label="@string/title_activity_keybroad"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".wheelview.WheelViewActivity"
+            android:label="@string/title_activity_wheelview"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".zxing.ZxingActivity"
+            android:label="@string/title_activity_zxing"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.zxing.activity.CaptureActivity" />
+        <activity
+            android:name=".xrecycleview.XRecycleViewActivity"
+            android:label="@string/title_activity_xrecycle"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".web.WebActivity"
+            android:label="@string/title_activity_js"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".web.WebStartActivity"
+            android:label="@string/title_activity_new_web"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".xrecycleview.GridActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".achartengine.ChartActivity"
+            android:label="@string/title_activity_baobiao"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".achartengine.PieCharActivity"
+            android:label="@string/title_activity_bingzhuang"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".achartengine.StackedActivity"
+            android:label="@string/title_activity_zhuzhuang"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".achartengine.ZhexianActivity"
+            android:label="@string/title_activity_zhexian"
+            android:theme="@style/AppTheme.NoActionBar" />
+    </application>
+
+</manifest>

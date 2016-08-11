@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="8dp" >
+
+     <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_share_weixin"
+        android:drawableTop="@drawable/wechat_share"
+        android:text="@string/weixinFriends"
+        style="@style/tv_share_style" />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" />
+    <TextView
+        android:id="@+id/tv_share_weixin_circle"
+        android:drawableTop="@drawable/friend_share"
+        android:text="@string/weixinCircle"
+        style="@style/tv_share_style" />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_share_qq"
+        android:drawableTop="@drawable/qq_share"
+        android:text="@string/weixinCircle"
+        style="@style/tv_share_style"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" />
+
+
+
+    <TextView
+        android:id="@+id/tv_share_qzone"
+        style="@style/tv_share_style"
+        android:drawableTop="@drawable/qqkongjian_share"
+        android:text="@string/sms"
+         />
+    <TextView
+        android:id="@+id/tv_share_sina"
+        style="@style/tv_share_style"
+        android:drawableTop="@drawable/weibo_share"
+        android:text="@string/sina"
+         />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
