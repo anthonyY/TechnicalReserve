@@ -20,6 +20,7 @@ import com.aiitec.technicalreserve.image.MultiImageActivity;
 import com.aiitec.technicalreserve.keybroad.KeybroadActivity;
 import com.aiitec.technicalreserve.web.WebActivity;
 import com.aiitec.technicalreserve.wheelview.WheelViewActivity;
+import com.aiitec.technicalreserve.xrecycleview.CommonRecyclerViewAdapter;
 import com.aiitec.technicalreserve.xrecycleview.XRecycleViewActivity;
 import com.aiitec.technicalreserve.zxing.ZxingActivity;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -56,11 +57,10 @@ public class MainActivity extends BaseActivity {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         main_recycler_view.setLayoutManager(mLayoutManager);
 
-        mAdapter = new MainAdapter(datas);
-        mAdapter.setOnItemClicklistener(new MainAdapter.OnItemClicklistener(){
+        mAdapter = new MainAdapter(this, datas);
+        mAdapter.setOnRecyclerViewItemClickListener(new CommonRecyclerViewAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-//                Snackbar.make(v, "您点击了第"+position+"条", Snackbar.LENGTH_LONG).show();
                 switch(position){
                     case 0:
                         startActivity(new Intent(MainActivity.this, MultiImageActivity.class));

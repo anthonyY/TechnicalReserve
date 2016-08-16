@@ -10,6 +10,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
+import com.aiitec.openapi.utils.AiiUtil;
 import com.aiitec.openapi.utils.ToastUtil;
 import com.aiitec.openapi.view.annatation.ContentView;
 import com.aiitec.openapi.view.annatation.Resource;
@@ -41,7 +45,7 @@ import java.util.List;
  * 对应的技术点说明，在 activity_keybroad.xml 中已经有说明，请查看。
  * 
  */
-public class XRecycleViewActivity extends BaseActivity implements XRecyclerView.LoadingListener, XRecyclerAdapter.OnItemClickListener {
+public class XRecycleViewActivity extends BaseActivity implements XRecyclerView.LoadingListener{
 
 	@Resource(R.id.btn_recycler_switch_style)
 	private Button btn_recycler_switch_style;
@@ -58,13 +62,23 @@ public class XRecycleViewActivity extends BaseActivity implements XRecyclerView.
 		LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
 		recycler_view.setLayoutManager(mLayoutManager);
 		recycler_view.setRefreshProgressStyle(ProgressStyle.BallClipRotateMultiple);
-//		recycler_view.setLaodingMoreProgressStyle(ProgressStyle.BallClipRotate);
-//		recycler_view.setArrowImageView(R.drawable.iconfont_downgrey);
-
+		Animation anim = AnimationUtils.loadAnimation(this, R.anim.recycle_grid_in);
+		recycler_view.setLayoutAnimation(new LayoutAnimationController(anim, 0.5f));
 		recycler_view.setLoadingListener(this);
 		data2.addAll(data);
 		adapter = new XRecyclerAdapter(this,data2);
-		adapter.setOnItemClickListener(this);
+		adapter.setOnRecyclerViewItemClickListener(new CommonRecyclerViewAdapter.OnRecyclerViewItemClickListener() {
+			@Override
+			public void onItemClick(View v, int position) {
+				ToastUtil.show(XRecycleViewActivity.this, "点击了"+adapter.getItem(position));
+			}
+		});
+//		adapter.setOnViewInItemClickListener(new CommonRecyclerViewAdapter.OnViewInItemClickListener() {
+//			@Override
+//			public void onViewInItemClick(View v, int position) {
+//
+//			}
+//		});
 		recycler_view.setAdapter(adapter);
 
 
@@ -77,10 +91,6 @@ public class XRecycleViewActivity extends BaseActivity implements XRecyclerView.
 		init();
 	}
 
-	@Override
-	public void onItemClick(View v, int position) {
-		ToastUtil.show(XRecycleViewActivity.this, "点击了"+adapter.getItem(position));
-	}
 
 	@Override
 	public void onRefresh() {

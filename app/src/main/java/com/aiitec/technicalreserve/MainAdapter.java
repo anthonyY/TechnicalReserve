@@ -1,5 +1,6 @@
 package com.aiitec.technicalreserve;
 
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.aiitec.technicalreserve.xrecycleview.CommonRecyclerViewAdapter;
+import com.aiitec.technicalreserve.xrecycleview.CommonRecyclerViewHolder;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,62 +20,26 @@ import java.util.List;
  * @author Anthony
  * @since 1.0
  */
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder>{
-    private List<String> mDataset;
+public class MainAdapter extends CommonRecyclerViewAdapter<String>{
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public CardView cardView;
-        public TextView textView;
-        public ViewHolder(CardView v) {
-            super(v);
-            cardView = v;
-            textView = (TextView)cardView.findViewById(R.id.textView);
-        }
-    }
-
-    public MainAdapter( List<String> myDataset) {
-        mDataset = myDataset;
-    }
 
     @Override
-    public MainAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // create a new view
-        CardView cardView = (CardView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_main, parent, false);
-        // set the view's size, margins, paddings and layout parameters
-//            ...
-        ViewHolder vh = new ViewHolder(cardView);
-        return vh;
+    public void convert(CommonRecyclerViewHolder h, String entity, int position) {
+        h.setText(R.id.textView, entity);
     }
-
-    // Replace the contents of a view (invoked by the layout manager)
+    //返回item布局的id
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        holder.textView.setText(mDataset.get(position));
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(onItemClicklistener != null){
-                    onItemClicklistener.onItemClick(v, position);
-                }
-            }
-        });
+    public int getLayoutViewId(int viewType) {
+        return R.layout.item_main;
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
-    @Override
-    public int getItemCount() {
-        return mDataset.size();
-    }
-    private OnItemClicklistener onItemClicklistener;
-
-    public void setOnItemClicklistener(OnItemClicklistener onItemClicklistener) {
-        this.onItemClicklistener = onItemClicklistener;
+    public MainAdapter(Context context, List<String> myDataset) {
+        super(context, myDataset);
     }
 
-    public interface OnItemClicklistener{
-        void onItemClick(View v, int position);
+    public MainAdapter(Context context) {
+        this(context, new ArrayList<String>());
     }
+
+
 }

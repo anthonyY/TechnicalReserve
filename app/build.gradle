@@ -35,4 +35,5 @@ dependencies {
     //    compile project(':xrecycleview')
     compile files('libs/AIIFoundation.jar')
     compile files('libs/achartengine-1.1.0.jar')
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }

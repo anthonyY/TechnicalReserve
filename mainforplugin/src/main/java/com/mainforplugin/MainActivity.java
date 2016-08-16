@@ -53,7 +53,7 @@ public class MainActivity extends DLBasePluginActivity {
     /**
      * 服务器地址
      */
-    private String url = "http://192.168.1.81:8080/plugin/";
+    private String url = "http://192.168.1.101:8080/plugin/";
 
     /**保存当前主题包路径的key*/
     public static final String KEY_THEME_PATH = "THEME_PACKAGE_PATH";
@@ -256,6 +256,7 @@ public class MainActivity extends DLBasePluginActivity {
                 }
             }
         }
+        AiiUtil.putString(MainActivity.this, KEY_THEME_PATH, null);
         loadData();
     }
 }

@@ -34,7 +34,6 @@ import com.aiitec.technicalreserve.BaseActivity;
 import com.aiitec.technicalreserve.R;
 import com.aiitec.technicalreserve.image.ImagePagerActivity;
 import com.aiitec.widgets.ShareDialog;
-import com.aiitec.widgets.ShareDialog1;
 
 /**
  * 客户端与网页javascript交互类
