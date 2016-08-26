@@ -1,9 +1,16 @@
 apply plugin: 'com.android.library'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'answersheetplugin '
+            keyPassword '127523'
+            storeFile file('F:/key/sign.keystore')
+            storePassword '127523'
+        }
+    }
     compileSdkVersion 23
-    buildToolsVersion "24.0.0 rc3"
-
+    buildToolsVersion "24.0.1"
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 23
@@ -19,7 +26,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
 }

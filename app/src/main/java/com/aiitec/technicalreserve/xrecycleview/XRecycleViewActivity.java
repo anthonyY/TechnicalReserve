@@ -37,13 +37,7 @@ import java.util.List;
 
 
 /**
- * 键盘回车的文字描述与监听类
- * 
- * @author Chalin
- * 
- * 快速集成说明:
- * 对应的技术点说明，在 activity_keybroad.xml 中已经有说明，请查看。
- * 
+ *
  */
 public class XRecycleViewActivity extends BaseActivity implements XRecyclerView.LoadingListener{
 

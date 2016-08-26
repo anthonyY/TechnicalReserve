@@ -16,13 +16,14 @@ import android.widget.TextView;
 import com.aiitec.openapi.utils.ToastUtil;
 import com.aiitec.openapi.view.ViewUtils;
 import com.aiitec.utils.SystemBarTintManager;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * @author Anthony
  *         CreateTime 2016/4/7.
  * @since 1.0
  */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity{
 //    TextView titleView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +33,7 @@ public class BaseActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.menu_toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_more:
-                        ToastUtil.show(getApplicationContext(), "点击了右上角按钮");
-                        break;
-                }
-                return false;
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        titleView = (TextView)findViewById(R.id.toolbar_title);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -99,18 +88,6 @@ public class BaseActivity extends AppCompatActivity {
         winParams.flags |= bits;
         win.setAttributes(winParams);
     }
-
-    /* public void showTextBackBtn(boolean isShow){
-        Button btn_back = (Button) findViewById(R.id.btn_back);
-        if(btn_back != null){
-            if(isShow){
-                btn_back .setVisibility(View.VISIBLE);
-            } else {
-                btn_back.setVisibility(View.GONE);
-            }
-        }
-    }
-*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -119,5 +96,13 @@ public class BaseActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

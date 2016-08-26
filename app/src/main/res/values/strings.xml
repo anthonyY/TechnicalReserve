@@ -15,6 +15,10 @@
         <item>Android 余JavaScript交互</item>
         <item>插件化开发</item>
         <item>报表</item>
+        <item>图片秒传</item>
+        <item>语音识别</item>
+        <item>腾讯IM</item>
+        <item>多渠道打包</item>
 
     </string-array>
     <string-array name="image_show_datas">
@@ -49,10 +53,14 @@
     <string name="title_activity_zhuzhuang">柱状图</string>
     <string name="title_activity_zhexian">折线图</string>
     <string name="title_activity_baobiao">报表</string>
+    <string name="title_activity_fast_upload">文件秒传</string>
+    <string name="title_activity_pack">多渠道打包</string>
     <string name="sure">确定</string>
     <string name="cacel">取消</string>
     <string name="weixinFriends">微信好友</string>
     <string name="weixinCircle">朋友圈</string>
     <string name="sina">新浪微博</string>
     <string name="sms">短信</string>
+    <string name="info"><b>多渠道打包工具</b>\n\n安卓应用商店（一个商店也叫做一个渠道，如360，baidu，xiaomi）众多，大大小小几百个，我们发布应用之后需要统计各个渠道的用户下载量，所以才有了多渠道打包。\n\n方案1：python脚本打包：具体请看<b>app</b>文件夹下的 <b>多渠道打包.zip， 适用于已经生成的apk中。 \n\n方案2： build配置， 用Android Studio打包，具体build配置请参考build.gradle文件，并且AndroidManifest.xml文件中  Channel ID 改成这样 android:name=\"${UMENG_CHANNEL_VALUE}\"，然后build 签名的apk, 选择所有平台就可以了。\n\n也可以参考 http://www.cnblogs.com/0616--ataozhijia/p/4203997.html</b></string>
+    <!--<string name="dabao_url"></string>-->
 </resources>

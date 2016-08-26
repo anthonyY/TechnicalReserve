@@ -24,9 +24,6 @@ import com.aiitec.openapi.view.annatation.Resource;
 import com.aiitec.technicalreserve.BaseActivity;
 import com.aiitec.technicalreserve.R;
 import com.aiitec.technicalreserve.image.ImageShowActivity;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 

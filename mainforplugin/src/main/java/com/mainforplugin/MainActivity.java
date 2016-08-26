@@ -1,25 +1,22 @@
 package com.mainforplugin;
 
 import android.annotation.TargetApi;
-import android.app.ProgressDialog;
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Environment;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.aiitec.openapi.net.AIIRequest;
+import com.aiitec.openapi.utils.LogUtil;
 import com.ryg.dynamicload.DLBasePluginActivity;
+import com.ryg.dynamicload.DLBasePluginFragmentActivity;
 import com.ryg.dynamicload.internal.DLIntent;
 import com.ryg.dynamicload.internal.DLPluginManager;
 import com.ryg.dynamicload.internal.DLPluginPackage;
@@ -33,49 +30,43 @@ import java.util.ArrayList;
  * github https://github.com/singwhatiwanna/dynamic-load-apk
  * CSDN 博客相关内容 http://blog.csdn.net/t12x3456/article/details/39958755/
  */
-public class MainActivity extends DLBasePluginActivity {
+public class MainActivity extends Activity {
     private ArrayList<PluginAdapter.PluginItem> mPluginItems = new ArrayList<PluginAdapter.PluginItem>();
     private PluginAdapter mPluginAdapter;
 
     private ListView mListView;
     private TextView mNoPluginTextView;
     private LinearLayout background;
-    private Button btnSkin1;
-    private Button btnSkin2;
 
-    private ProgressDialog progressDialog;
+    AIIRequest aiiRequest;
+
 
     //没有服务器测试的话把插件放在   手机跟目录/DynamicLoadHost 下
     /**
      * 插件路径
      */
-    private String pluginFolder;
-    /**
-     * 服务器地址
-     */
-    private String url = "http://192.168.1.101:8080/plugin/";
+    public static String pluginFolder;
 
     /**保存当前主题包路径的key*/
     public static final String KEY_THEME_PATH = "THEME_PACKAGE_PATH";
 
-    private HttpUtils httpUtils;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        LogUtil.showLog = true;
         initView();
         initData();
     }
 
     private void initView() {
         background = (LinearLayout) findViewById(R.id.background);
-        btnSkin1 = (Button) findViewById(R.id.btnSkin1);
-        btnSkin2 = (Button) findViewById(R.id.btnSkin2);
+//        btnSkin1 = (Button) findViewById(R.id.btnSkin1);
+//        btnSkin2 = (Button) findViewById(R.id.btnSkin2);
         mNoPluginTextView = (TextView) findViewById(R.id.mNoPluginTextView);
         mListView = (ListView) findViewById(R.id.mListView);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("正在下载......");
+
         mPluginAdapter = new PluginAdapter(this,mPluginItems);
         mPluginAdapter.setOnButtonClickListener(new PluginAdapter.OnButtonClickListener() {
             @Override
@@ -99,15 +90,15 @@ public class MainActivity extends DLBasePluginActivity {
         mListView.setAdapter(mPluginAdapter);
     }
     private void initData() {
-        httpUtils = new HttpUtils();
+
         if(!AiiUtil.isSDCardEnable()){
             return;
         }
         File file = getExternalCacheDir();
         if(file != null){
-            pluginFolder = file.getAbsolutePath()+"/DynamicLoadHost";
+            pluginFolder = file.getAbsolutePath()+"/DynamicLoadHost/";
         } else {
-            pluginFolder = Environment.getExternalStorageDirectory() + "/DynamicLoadHost";
+            pluginFolder = Environment.getExternalStorageDirectory() + "/DynamicLoadHost/";
         }
 
 
@@ -122,12 +113,9 @@ public class MainActivity extends DLBasePluginActivity {
         if(!file.exists()){
             file.mkdir();
         }
-
         File[] plugins = file.listFiles();
         if (plugins == null || plugins.length == 0) {
             mNoPluginTextView.setVisibility(View.VISIBLE);
-            btnSkin1.setVisibility(View.VISIBLE);
-            btnSkin2.setVisibility(View.VISIBLE);
             mPluginItems.clear();
             mPluginAdapter.update(mPluginItems);
             return;
@@ -149,13 +137,7 @@ public class MainActivity extends DLBasePluginActivity {
                     && item.packageInfo.services.length > 0) {
                 item.launcherServiceName = item.packageInfo.services[0].name;
             }
-
             mPluginItems.add(item);
-            if(item.launcherActivityName.equals("com.ryg.dynamicload.sample.mainplugin.MainActivity")){
-                btnSkin1.setVisibility(View.GONE);
-            } else if(item.launcherActivityName.equals("com.plugin_2.MainActivity")){
-                btnSkin2.setVisibility(View.GONE);
-            }
         }
         PluginAdapter.PluginItem item = new PluginAdapter.PluginItem();
         item.id = -1;
@@ -164,10 +146,8 @@ public class MainActivity extends DLBasePluginActivity {
     }
 
     public void doDownload(View view) {
-        if(view.getId() ==  R.id.btnSkin1) {
-            download("plugin-1-debug.apk");
-        } else if(view.getId() ==  R.id.btnSkin2){
-            download("plugin-2-debug.apk");
+        if(view.getId() ==  R.id.btnSkin2){
+            startActivityForResult(new Intent(this, OnlineSkinActivity.class), 1);
         }
     }
     public void deletePlugin(View view) {
@@ -177,42 +157,6 @@ public class MainActivity extends DLBasePluginActivity {
     }
 
 
-    private void download(String fileName) {
-
-        httpUtils.download(url+fileName, pluginFolder+"/"+fileName, true, new RequestCallBack<File>() {
-
-            @Override
-            public void onStart() {
-                super.onStart();
-                if(!progressDialog.isShowing()){
-                    progressDialog.show();
-                }
-            }
-            @Override
-            public void onSuccess(ResponseInfo<File> responseInfo) {
-                Toast.makeText(getApplicationContext(), "下载完成！", Toast.LENGTH_SHORT).show();
-                Log.e("aiitec", "下载完成！");
-                loadData();
-                progressDialog.dismiss();
-            }
-
-            @Override
-            public void onLoading(long total, long current, boolean isUploading) {
-                super.onLoading(total, current, isUploading);
-                progressDialog.setMessage("正在下载  "+(current*100/total)+"%");
-
-            }
-
-            @Override
-            public void onFailure(HttpException error, String msg) {
-                Toast.makeText(getApplicationContext(), "下载失败！"+msg, Toast.LENGTH_SHORT).show();
-                Log.e("aiitec", "下载失败！"+msg);
-                if(progressDialog.isShowing()){
-                    progressDialog.dismiss();
-                }
-            }
-        });
-    }
     @SuppressWarnings("deprecation")
     private void setBackgroundLowVersion(View view, Drawable drawable) {
         view.setBackgroundDrawable(drawable);
@@ -257,6 +201,12 @@ public class MainActivity extends DLBasePluginActivity {
             }
         }
         AiiUtil.putString(MainActivity.this, KEY_THEME_PATH, null);
+        loadData();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         loadData();
     }
 }

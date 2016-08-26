@@ -1,9 +1,23 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            keyPassword '127523'
+            storeFile file('F:/key/signdebug.keystore')
+            storePassword '127523'
+            keyAlias 'aiidebug'
+        }
+        release {
+            keyPassword '127523'
+            storeFile file('F:/key/sign.keystore')
+            storePassword '127523'
+            keyAlias 'answersheetplugin'
+        }
+
+    }
     compileSdkVersion 23
     buildToolsVersion '23.0.3'
-
     defaultConfig {
         applicationId "com.aiitec.technicalreserve"
         minSdkVersion 15
@@ -11,10 +25,56 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    productFlavors {
+
+        wandoujia {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "wandoujia"]
+        }
+        yingyongbao {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "yingyongbao"]
+        }
+        baidu {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "baidu"]
+        }
+
+        qihu360 {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "qihu360"]
+        }
+
+        xiaomi {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
+        }
+
+    }
     buildTypes {
-        release {
+        debug {
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                File outputDirectory = new File(outputFile.parent);
+                def fileName
+                if (variant.buildType.name == "release") {
+//                    fileName = "app_v${defaultConfig.versionName}_${packageTime()}_${variant.productFlavors[0].name}.apk"
+                    fileName = "technical_${variant.productFlavors[0].name}.apk"
+                } else {
+//                    fileName = "app_v${defaultConfig.versionName}_${packageTime()}_beta.apk"
+                    fileName = "technical_${variant.productFlavors[0].name}_debug.apk"
+                }
+                output.outputFile = new File(outputDirectory, fileName)
+            }
         }
     }
 }
@@ -33,7 +93,8 @@ dependencies {
     compile 'com.jcodecraeer:xrecyclerview:1.2.7'
     //这个貌似需要编译sdk版本23才行， 所以22的可以暂时用下面的库
     //    compile project(':xrecycleview')
-    compile files('libs/AIIFoundation.jar')
     compile files('libs/achartengine-1.1.0.jar')
-    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    //友盟统计
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }

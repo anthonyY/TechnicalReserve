@@ -17,18 +17,18 @@
     <LinearLayout 
         android:layout_width="match_parent"
     	android:layout_height="wrap_content">
-        <Button 
+      <!--  <Button
             android:id="@+id/btnSkin1"
             android:onClick="doDownload"
             android:layout_width="wrap_content"
     		android:layout_height="wrap_content"
-    		android:text="下载皮肤1"/>
+    		android:text="下载皮肤1"/>-->
         <Button 
             android:id="@+id/btnSkin2"
             android:onClick="doDownload"
             android:layout_width="wrap_content"
     		android:layout_height="wrap_content"
-    		android:text="下载皮肤2"/>
+    		android:text="下载皮肤"/>
         <Button
             android:id="@+id/deleteAllPlugin"
             android:onClick="deletePlugin"

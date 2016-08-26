@@ -1,1 +1,1 @@
-include ':app', ':multi-image-selector', ':wheelview', ':zxing', ':xrecycleview', ':dl_sdk', ':plugin-1', ':plugin-2', ':mainforplugin'
+include ':app', ':multi-image-selector', ':wheelview', ':zxing', ':xrecycleview', ':dl_sdk', ':plugin-1', ':plugin-2', ':mainforplugin', ":voice",":im_demo"
