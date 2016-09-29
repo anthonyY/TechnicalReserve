@@ -68,10 +68,10 @@ android {
                 def fileName
                 if (variant.buildType.name == "release") {
 //                    fileName = "app_v${defaultConfig.versionName}_${packageTime()}_${variant.productFlavors[0].name}.apk"
-                    fileName = "technical_${variant.productFlavors[0].name}.apk"
+                    fileName = "technical_${variant.productFlavors[0].name}_v${defaultConfig.versionName}.apk"
                 } else {
 //                    fileName = "app_v${defaultConfig.versionName}_${packageTime()}_beta.apk"
-                    fileName = "technical_${variant.productFlavors[0].name}_debug.apk"
+                    fileName = "technical_${variant.productFlavors[0].name}_v${defaultConfig.versionName}_debug.apk"
                 }
                 output.outputFile = new File(outputDirectory, fileName)
             }

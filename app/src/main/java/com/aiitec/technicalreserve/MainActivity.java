@@ -40,7 +40,6 @@ import java.util.List;
  */
 public class MainActivity extends BaseActivity {
 
-
     @Resource(R.id.main_recycler_view)
     private RecyclerView main_recycler_view;
     private MainAdapter mAdapter;
@@ -141,6 +140,33 @@ public class MainActivity extends BaseActivity {
                         break;
                     case 14:
                         startActivity(new Intent(MainActivity.this, PackActivity.class));
+                        break;
+                    case 15:
+                        try {//广播启动另一个项目aiitec.tomcat
+                            Intent intent = new Intent();
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            ComponentName comp = new ComponentName("com.example.administrator.avdemo", "com.example.administrator.avdemo.LoginActivity");
+                            intent.setComponent(comp);
+                            intent.setAction("android.intent.action.VIEW");
+                            startActivity(intent);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ToastUtil.show(MainActivity.this, "com.example.administrator.avdemo APK");
+                        }
+                        break;
+                    case 16:
+                        try {//广播启动另一个项目aiitec.tomcat
+                            Intent intent = new Intent();
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            ComponentName comp = new ComponentName("com.aiitec.fmzh", "an.com.alipaytest.MainActivity");
+                            intent.setComponent(comp);
+                            intent.setAction("android.intent.action.VIEW");
+                            startActivity(intent);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            ToastUtil.show(MainActivity.this, "alipaytest APK");
+                        }
+
                         break;
                 }
             }

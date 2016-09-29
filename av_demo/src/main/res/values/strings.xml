@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AVDemo</string>
+
+    <string name="tip_force_offline">您的帐号已在其它地方登陆</string>
+</resources>
