@@ -85,7 +85,7 @@ public class WheelViewActivity extends BaseActivity {
 				if (wheelSeparateUtils != null && wheelSeparateUtils.isShow()) {
 					wheelSeparateUtils.dismiss();
 				}
-				wheelSeparateUtils.show(view);
+				wheelSeparateUtils.show();
 				break;
 
 			/**	联动 2个按钮的监听*/

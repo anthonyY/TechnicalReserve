@@ -181,12 +181,14 @@ public class WheelSeparateUtils {
 		return false;
 	}
 	
-	public void show(View v){
+	public void show(){
 		if (popupWindow != null) {
 			Rect rect = new Rect();
-			((Activity)context).getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
-			int winHeight =((Activity)context).getWindow().getDecorView().getHeight();
-			popupWindow.showAtLocation(v, Gravity.BOTTOM, 0, winHeight-rect.bottom);
+			View view = ((Activity)context).getWindow().getDecorView();
+			view.getWindowVisibleDisplayFrame(rect);
+
+			int winHeight =view.getHeight();
+			popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, winHeight-rect.bottom);
 		}
 	}
 	
